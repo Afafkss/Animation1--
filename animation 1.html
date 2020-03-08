@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>Animation 1</title>
+</head>
+<body>
+<canvas id = "canvas" width = "320" height = "480"></canvas>
+<script>
+document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+var b = new Image();
+b.src = "Boolean.png";
+var fon = new Image();
+fon.src = "fon.jpg";
+var bo = [];
+var t = 0;
+document.addEventListener("mousemove",function(e){
+if(t%5 == 0){
+bo.push({x:e.pageX-16,y:e.pageY-16,width:Math.random()*(100 - 32) + 32,speed:Math.random()*(5-1)+1});
+}
+});
+function game(){
+ctx.clearRect(0,0,320,480);
+ctx.drawImage(fon,0,0,320,480);	
+for(i in bo){
+ctx.drawImage(b,bo[i].x,bo[i].y,bo[i].width,bo[i].width);
+bo[i].y-=bo[i].speed;
+if(bo[i].y < -100){
+bo.splice(i,1);
+}
+}
+t+=1;
+}
+setInterval(game,20);
+</script>
+</body>
+</html>
